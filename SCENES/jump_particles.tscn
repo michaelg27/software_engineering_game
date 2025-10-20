@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwe5igyde62g6"]
+
+[ext_resource type="Script" uid="uid://c8folvnkwsnj" path="res://Important Scripts/jump_particles.gd" id="1_rwoox"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyvvi"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.43134022, 0.43134025, 0.43134025, 1)
+
+[sub_resource type="Curve" id="Curve_rwoox"]
+_data = [Vector2(0, 0.08785081), 0.0, 0.0, 0, 0, Vector2(0.34920636, 1), 0.0, 0.0, 0, 0, Vector2(0.7596372, 1), 0.0, 0.0, 0, 0, Vector2(0.95464855, 0.05036521), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_4ms4t"]
+curve = SubResource("Curve_rwoox")
+
+[sub_resource type="Curve" id="Curve_xwios"]
+_data = [Vector2(0.038548745, 0), 0.0, 0.0, 0, 0, Vector2(0.63492066, 1), 0.0, 0.0, 0, 0, Vector2(0.86848074, 0.8600539), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tsjgg"]
+curve = SubResource("Curve_xwios")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7s42n"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 90, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 2.0
+emission_ring_cone_angle = 90.0
+angle_min = -89.99999
+angle_max = 90.000015
+inherit_velocity_ratio = 2.0
+direction = Vector3(1, -1, 0)
+spread = 20.0
+initial_velocity_min = 2.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, 40, 0)
+scale_curve = SubResource("CurveTexture_tsjgg")
+alpha_curve = SubResource("CurveTexture_4ms4t")
+
+[sub_resource type="SphereMesh" id="SphereMesh_7sd16"]
+
+[node name="JumpParticles" type="Node3D"]
+script = ExtResource("1_rwoox")
+
+[node name="JumpSmoke" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_wyvvi")
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7s42n")
+draw_pass_1 = SubResource("SphereMesh_7sd16")

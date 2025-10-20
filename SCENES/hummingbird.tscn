@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl8rk6bnipthd"]
+
+[ext_resource type="PackedScene" uid="uid://b0moujjponb56" path="res://3D MODELS/HummingBird/Hummingbird.glb" id="1_l6w1p"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vreyg"]
+animation = &"ArmatureAction_001"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4cujr"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hvbw1"]
+states/ArmatureAction_001/node = SubResource("AnimationNodeAnimation_vreyg")
+states/ArmatureAction_001/position = Vector2(502.65005, 90)
+transitions = ["Start", "ArmatureAction_001", SubResource("AnimationNodeStateMachineTransition_4cujr")]
+graph_offset = Vector2(202.72499, -61.799995)
+
+[node name="Hummingbird" instance=ExtResource("1_l6w1p")]
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(0.9995533, 0.021573124, 0.020683713, -0.021135876, 0.9995533, -0.02113032, -0.021130322, 0.020683713, 0.99956274, 0, -1.6815226, -0.776906)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0.050540928, -0.043814767, 0.07047676)
+bones/0/rotation = Quaternion(0.2764957, 0.009766304, 0.0025974857, 0.96096206)
+bones/1/rotation = Quaternion(-0.52981424, -0.15929458, 0.5322415, 0.6408128)
+bones/2/rotation = Quaternion(0.10892434, -0.050560568, -0.0893427, 0.98873514)
+bones/4/rotation = Quaternion(-0.07877624, 4.216046e-11, -4.7131323e-08, 0.9968924)
+bones/5/rotation = Quaternion(-0.116597, -0.009780565, -0.002542399, 0.9931279)
+bones/6/rotation = Quaternion(0.98781765, 3.7462847e-08, 2.3565018e-07, -0.15561646)
+bones/7/rotation = Quaternion(-0.07024552, -6.2135697e-10, 2.8852198e-11, 0.99752975)
+bones/8/rotation = Quaternion(-0.5476086, 0.10815052, -0.5750979, 0.59807247)
+bones/9/rotation = Quaternion(0.10514802, 0.050180294, 0.08974914, 0.9891263)
+bones/11/rotation = Quaternion(0.084333286, 2.3756922e-07, 2.0106619e-08, 0.9964376)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeStateMachine_hvbw1")
+anim_player = NodePath("../AnimationPlayer")
